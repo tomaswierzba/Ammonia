@@ -329,6 +329,24 @@ fig.update_layout( waterfallgap = 0.2, margin=dict(l=20, r=20, t=20, b=20),font_
 fig.update_xaxes(tickfont=dict(size=20))
 fig.update_yaxes(tickfont=dict(size=20))
 
+
+fig.add_layout_image(
+        dict(
+            source="https://images.plot.ly/language-icons/api-home/python-logo.png",
+            xref="x",
+            yref="y",
+            x=0,
+            y=3,
+            sizex=2,
+            sizey=2,
+            sizing="stretch",
+            opacity=0.5,
+            layer="below")
+)
+
+# Set templates
+fig.update_layout(template="plotly_white")
+
 fig.show()
 
 st.plotly_chart(fig)# use_container_width=True)
