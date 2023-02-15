@@ -29,7 +29,7 @@ st.image(image, caption=None)
 #st.write(new_title0, unsafe_allow_html=True)
 st.write(""" # E-Ammonia Business-Case Tool """)
 
-st.write(""" Created in the ClusterSoutH2 Project - Funded by Energy Cluster Denmark """)
+st.write(""" Created in the ClusterSoutH2 Project - Facilitated by Energy Cluster Denmark & Funded by The European Regional Development Fund (ERDF) """)
 
 
 
@@ -83,8 +83,8 @@ elec_technology = st.sidebar.selectbox(
     ('AEC','SOEC'))  
 
 #elec_technology = st.sidebar.selectbox(
-    'Select electrolyzer technology, custom your own or go for a PPA:',
-    ('AEC','SOEC','Custom','Get green H\u2082 through PPA'))
+  #  'Select electrolyzer technology, custom your own or go for a PPA:',
+ #   ('AEC','SOEC','Custom','Get green H\u2082 through PPA'))
 
 
 if elec_technology == 'SOEC':
@@ -262,7 +262,7 @@ col1, col2 , col3,col4= st.columns([2,3,1.5,3])
 col1.metric("Payback time", '%s' % (a101))
 col3.metric("IRR", "%s" % (IRR2))
 col2.metric("NPV", "%s M€/MW"  % (npv2))
-col4.metric("LCoH", "%s €/ton" % (LCoH2))
+col4.metric("LCoAmmonia", "%s €/ton" % (LCoH2))
 st.metric("Cost-driver","%s (%s %% of cost)" % (a20, per_main_costdriver))
 #st.write("The main cost-driver for the Levelized Cost of Hydrogen is found to be %s, accounting for %s %% of the cost." % (a20, per_main_costdriver))
 
