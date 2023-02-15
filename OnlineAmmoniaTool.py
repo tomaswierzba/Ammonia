@@ -317,7 +317,7 @@ fig = go.Figure(go.Waterfall(
     y = [LCoH_electricity_cost2,LCoH_capex_am_2,LCoH_capex_elec_2,LCoH_opex_ammonia2,LCoH_stack_rep_cost2, LCoH_opex_electrolyser2,LCoH2 ],
     connector = {"line":{"color":"rgb(63, 63, 63)"}},
     increasing = {"marker":{"color":"#ffe300",
-                  "line":{"color":"lightgreen", "width":2}}}
+                  "line":{"color":"#ffe300", "width":2}}}
     
 ))
 
