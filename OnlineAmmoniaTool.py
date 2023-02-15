@@ -120,7 +120,7 @@ for t in range(1,lifetime+1):
     ammonia_income_yearly[t] = Ammonia_price * ammonia_prod_yearly[t] #€/year
 #Since ammonia synthesis facilities are designed to work with a maximum flow - and the correwsponding capital investment is based on this. Due to the fact that the maximum hydrogen production in one hour is 20kg (for a 1 MW AEC, depends on technology), then the maximum production capacity will be given by:
 if elec_technology=='Get green H\u2082 through PPA':  
-    max_ammonia_prod_flow = Hydrogen_amount_purchased*/8760*34/6*Ammonia_H2_conversion/100 #assuming constant h2 input
+    max_ammonia_prod_flow = Hydrogen_amount_purchased*1000/8760*34/6*Ammonia_H2_conversion/100 #assuming constant h2 input
 else:
     max_ammonia_prod_flow = H2_electrolyser_input*electrolyser_nom_cap*34/6*Ammonia_H2_conversion/100
 #-----------------------------------OPEX & CAPEX---------------------------------------------------------------------------------------
