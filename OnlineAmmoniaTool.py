@@ -243,13 +243,18 @@ if elec_technology !='Get green H\u2082 through PPA':
     LCoH_stack_rep_cost2 = round(LCoH_stack_rep_cost,1)
 else:
     LCoH_stack_rep_cost2=0
-
-data = {
-'Electricity':LCoH_electricity_cost2,'CAPEX Ammonia':LCoH_capex_am_2,'CAPEX Hydrogen':LCoH_capex_elec_2,'Stack Replacement':LCoH_stack_rep_cost2, 'OPEX El.':LCoH_opex_electrolyser2
-, 'OPEX Ammonia Syn.':LCoH_opex_ammonia2}
-a20 = max(data, key=data.get)
-per_main_costdriver = round(data[a20] / LCoH * 100 )
-
+if !='Get green H\u2082 through PPA':
+    data = {
+    'Electricity':LCoH_electricity_cost2,'CAPEX Ammonia':LCoH_capex_am_2,'CAPEX Hydrogen':LCoH_capex_elec_2,'Stack Replacement':LCoH_stack_rep_cost2, 'O&M Electrolyzer':LCoH_opex_electrolyser2
+    , 'OPEX Ammonia Syn.':LCoH_opex_ammonia2}
+    a20 = max(data, key=data.get)
+    per_main_costdriver = round(data[a20] / LCoH * 100 )
+else:
+    data = {
+    'Electricity':LCoH_electricity_cost2,'CAPEX Ammonia':LCoH_capex_am_2,'CAPEX Hydrogen':LCoH_capex_elec_2,'Stack Replacement':LCoH_stack_rep_cost2, 'Green Hydrogen cost PPA':LCoH_opex_electrolyser2
+    , 'OPEX Ammonia Syn.':LCoH_opex_ammonia2}
+    a20 = max(data, key=data.get)
+    per_main_costdriver = round(data[a20] / LCoH * 100 )
 #------------------------------------Show results-----------------------------------------------------------------
 #new_title7 = '<p style="font-size:45px;font-weight:700;color:black;text-align:center;">Results</p>'
 #st.write(new_title7, unsafe_allow_html=True)
@@ -284,7 +289,7 @@ if elec_technology !='Get green H\u2082 through PPA':
 else: 
     source = pd.DataFrame({"Values": [LCoH_capex_am_2,LCoH_opex_ammonia2, LCoH_opex_electrolyser2],"Cost contribution": ['CAPEX Ammonia Synthesis: %s €/ton' % (LCoH_capex_am_2),'O&M Ammonia Synthesis: %s €/ton' % (LCoH_opex_ammonia2),'Green Hydrogen cost PPA: %s €/ton' % (LCoH_opex_electrolyser2)],"labels":["%s €/ton" % (LCoH_capex_am_2),"%s €/ton" % (LCoH_opex_electrolyser2),"%s €/ton" % (LCoH_opex_ammonia2)]})
     domain = ['CAPEX Ammonia Synthesis: %s €/ton' % (LCoH_capex_am_2),'O&M Ammonia Synthesis: %s €/ton' % (LCoH_opex_ammonia2),'Green Hydrogen cost PPA: %s €/ton' % (LCoH_opex_electrolyser2)]
-    range_ = ['#088da5', 'grey', '#f0f2f6']
+    range_ = [ 'grey','#ffe300','#a2c11c']
     base = alt.Chart(source).encode(
         theta=alt.Theta("Values:Q", stack=True), color=alt.Color('Cost contribution:N', scale=alt.Scale(domain=domain, range=range_),legend=alt.Legend(clipHeight=50)),
         radius=alt.Radius("Values:Q", scale=alt.Scale(type="sqrt", zero=True, rangeMin=20)),
