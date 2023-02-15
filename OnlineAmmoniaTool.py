@@ -323,6 +323,7 @@ fig.update_layout( waterfallgap = 0.2, margin=dict(l=20, r=20, t=20, b=20),font_
 )
 
 fig.update_xaxes(tickfont=dict(size=20))
+fig.update_yaxes(tickfont=dict(size=20))
 
 fig.show()
 
