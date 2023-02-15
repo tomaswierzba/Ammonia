@@ -2,3 +2,4 @@ numpy_financial
 matplotlib
 waterfallcharts
 waterfall_ax
+plotly
