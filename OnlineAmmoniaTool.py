@@ -243,7 +243,7 @@ if elec_technology !='Get green H\u2082 through PPA':
     LCoH_stack_rep_cost2 = round(LCoH_stack_rep_cost,1)
 else:
     LCoH_stack_rep_cost2=0
-if !='Get green H\u2082 through PPA':
+if elec_technology !='Get green H\u2082 through PPA':
     data = {
     'Electricity':LCoH_electricity_cost2,'CAPEX Ammonia':LCoH_capex_am_2,'CAPEX Hydrogen':LCoH_capex_elec_2,'Stack Replacement':LCoH_stack_rep_cost2, 'O&M Electrolyzer':LCoH_opex_electrolyser2
     , 'OPEX Ammonia Syn.':LCoH_opex_ammonia2}
