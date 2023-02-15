@@ -336,7 +336,7 @@ fig.add_layout_image(
             xref="x",
             yref="y",
             x= "CAPEX Ammonia Synthesis",
-            y=500,
+            y=LCoH2/1.5,
             sizex=3,
             sizey=200,
 
