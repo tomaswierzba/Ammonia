@@ -167,7 +167,7 @@ if elec_technology !='Get green H\u2082 through PPA':
 #------------------------------------NPV--------------------------------------------------------------------------------------
 discountRate2 = round(discountRate*100,1)
 npv             = npf.npv(discountRate, cf)
-npv2 = round(npv,1)
+npv2 = round(npv,0)
 NPV = np.zeros(len(cf))
 for i in range(0,len(cf)):
     NPV[i] = npf.npv(discountRate, cf[0:(i+1)])
@@ -265,7 +265,7 @@ st.write(""" # Results """)
 col1, col2 , col3,col4= st.columns([2,3,1.5,3])
 col1.metric("Payback time", '%s' % (a101))
 col3.metric("IRR", "%s" % (IRR2))
-col2.metric("NPV", "%s M€/MW"  % (npv2))
+col2.metric("NPV", "%s M€/GW"  % (npv2))
 col4.metric("LCoAmmonia", "%s €/ton" % (LCoH2))
 st.metric("Cost-driver","%s (%s %% of cost)" % (a20, per_main_costdriver))
 #st.write("The main cost-driver for the Levelized Cost of Hydrogen is found to be %s, accounting for %s %% of the cost." % (a20, per_main_costdriver))
