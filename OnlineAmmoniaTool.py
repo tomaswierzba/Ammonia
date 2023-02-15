@@ -56,14 +56,6 @@ Electricity_spot_MWh = st.sidebar.slider('Average electricity spot price in €/
 Electricity_spot = Electricity_spot_MWh/1000
 
 
-new_title4b = '<p style="font-size:20px;font-weight:600;color:#f0f2f6">Ammonia Synthesis</p>'
-st.sidebar.markdown(new_title4b, unsafe_allow_html=True)
-
-Ammonia_H2_conversion = st.sidebar.slider('Conversion factor as % of H\u2082 converted: ', 50, 100, 90,1)
-Ammonia_specific_invest_tony = st.sidebar.slider('Ammonia capital investment in €/(ton/y) ammonia: ', 0, 1000, 350,50)
-Ammonia_specific_invest = Ammonia_specific_invest_tony*8.76 #in euros per kg/h
-Ammonia_OPEX_percentage = st.sidebar.slider('O&M yearly in % CAPEX: ', 0, 20, 2,1)
-    
 new_title5 = '<p style="font-size:20px;font-weight:600;color:#f0f2f6">Financial</p>'
 st.sidebar.markdown(new_title5, unsafe_allow_html=True)
 
@@ -74,13 +66,25 @@ lifetime = st.sidebar.slider('Project lifetime in years:', 0, 30,25,1)
 discountRate_100 = st.sidebar.slider('Desired discount rate in %:', 0, 50, 5,1)
 discountRate = discountRate_100/100
 
+new_title4b = '<p style="font-size:20px;font-weight:600;color:#f0f2f6">Ammonia Synthesis</p>'
+st.sidebar.markdown(new_title4b, unsafe_allow_html=True)
+
+Ammonia_H2_conversion = st.sidebar.slider('Conversion factor as % of H\u2082 converted: ', 75, 100, 90,1)
+Ammonia_specific_invest_tony = st.sidebar.slider('Ammonia capital investment in €/(ton/y) ammonia: ', 0, 1000, 350,50)
+Ammonia_specific_invest = Ammonia_specific_invest_tony*8.76 #in euros per kg/h
+Ammonia_OPEX_percentage = st.sidebar.slider('O&M yearly in % CAPEX: ', 0, 20, 2,1)
+
 new_title4 = '<p style="font-size:20px;font-weight:600;color:#f0f2f6">Electrolyzer</p>'
 st.sidebar.markdown(new_title4, unsafe_allow_html=True)
 
 #Decide electrolyzer technology
 elec_technology = st.sidebar.selectbox(
+    'Select electrolyzer technology and custom:',
+    ('AEC','SOEC'))  
+
+#elec_technology = st.sidebar.selectbox(
     'Select electrolyzer technology, custom your own or go for a PPA:',
-    ('AEC','SOEC'))  #'Get green H\u2082 through PPA'
+    ('AEC','SOEC','Custom','Get green H\u2082 through PPA'))
 
 
 if elec_technology == 'SOEC':
