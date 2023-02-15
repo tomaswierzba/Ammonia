@@ -36,13 +36,13 @@ st.write(""" Created in the ClusterSoutH2 Project - Funded by Energy Cluster Den
 
 #Explain assumptions here
 
-electrolyser_nom_cap = 1000 #kW
+electrolyser_nom_cap = 1000000 #kW
 
 st.sidebar.image(image2)
 
 new_title1 = '<p style="font-size:25px;font-weight:600;color:#f0f2f6">Key variables</p>'
 st.sidebar.write(new_title1, unsafe_allow_html=True)
-new_title3 = '<p style="font-size:15px;font-weight:500;color:#f0f2f6">This tool assumes a 1 MW electrolyzer. Main variables for this business case-study can be changed in the left pane and their initial values repesent AEC technology.</p>'
+new_title3 = '<p style="font-size:15px;font-weight:500;color:#f0f2f6">This tool assumes a 1 GW electrolyzer. Main variables for this business case-study can be changed in the left pane and their initial values repesent AEC technology.</p>'
 st.sidebar.write(new_title3, unsafe_allow_html=True)
 
 new_title2 = '<p style="font-size:20px;font-weight:600;color:#f0f2f6">Market prices</p>'
@@ -55,48 +55,13 @@ Ammonia_price = st.sidebar.slider('Average Ammonia sales price in €/ton:',0, 2
 Electricity_spot_MWh = st.sidebar.slider('Average electricity spot price in €/MWh: ', 0, 200, 50,10)
 Electricity_spot = Electricity_spot_MWh/1000
 
-new_title4 = '<p style="font-size:20px;font-weight:600;color:#f0f2f6">Electrolyzer</p>'
-st.sidebar.markdown(new_title4, unsafe_allow_html=True)
-
-#Decide electrolyzer technology
-elec_technology = st.sidebar.selectbox(
-    'Select electrolyzer technology, custom your own or go for a PPA:',
-    ('AEC','SOEC', 'Custom', 'Get green H\u2082 through PPA'))
-
-if elec_technology=='Custom':
-    full_load_hours= st.sidebar.slider('Electrolyzer full-load hours of operation in a year: ', 0, 8760, 7500,100)
-    H2_electrolyser_input_1000 = st.sidebar.slider('Power-to-Hydrogen production ratio in kg/MWh: ', 10, 30, 20,1)
-    electrolyser_specific_invest= st.sidebar.slider('Electrolyzer capital investment in €/kW: ', 0, 5000, 1000,250)
-    technical_lifetime_stacks= st.sidebar.slider('Stacks lifetime in full-load hours of operation: ', 0, 100000,100000 ,5000)
-    electrolyser_OPEX_percentage2= st.sidebar.slider('O&M yearly in % CAPEX (excluding Stack replacement cost): ', 0, 20, 5,1)
-    electrolyser_STACK_replacement_100 = st.sidebar.slider('Stack replacement cost as % of CAPEX: ', 0, 50,25,1)
-elif elec_technology == 'SOEC':
-    full_load_hours= st.sidebar.slider('Electrolyzer full-load hours of operation in a year: ', 0, 8760, 7500,100)
-    H2_electrolyser_input_1000=23.3
-    technical_lifetime_stacks=20000
-    electrolyser_specific_invest=3000
-    electrolyser_OPEX_percentage2=5
-    electrolyser_STACK_replacement_100=20
-elif elec_technology == 'AEC':
-    full_load_hours= st.sidebar.slider('Electrolyzer full-load hours of operation in a year: ', 0, 8760, 7500,100)
-    H2_electrolyser_input_1000=20
-    technical_lifetime_stacks=100000
-    electrolyser_specific_invest=750
-    electrolyser_OPEX_percentage2=5
-    electrolyser_STACK_replacement_100=30
-elif elec_technology == 'Get green H\u2082 through PPA':
-    Hydrogen_cost = st.sidebar.slider('H\u2082 cost in €/kg: ',0, 15,3,1)  
-    Hydrogen_amount_purchased = st.sidebar.slider('H\u2082 purchased in ton/year: ',0, 85,10,1)
-if elec_technology !='Get green H\u2082 through PPA':
-    H2_electrolyser_input = H2_electrolyser_input_1000/1000
-    electrolyser_OPEX_percentage = electrolyser_OPEX_percentage2/100
-    electrolyser_STACK_replacement = electrolyser_STACK_replacement_100/100
 
 new_title4b = '<p style="font-size:20px;font-weight:600;color:#f0f2f6">Ammonia Synthesis</p>'
 st.sidebar.markdown(new_title4b, unsafe_allow_html=True)
 
 Ammonia_H2_conversion = st.sidebar.slider('Conversion factor as % of H\u2082 converted: ', 50, 100, 90,1)
-Ammonia_specific_invest = st.sidebar.slider('Ammonia capital investment in €/(kg/h) ammonia: ', 0, 5000, 3000,250)
+Ammonia_specific_invest_tony = st.sidebar.slider('Ammonia capital investment in €/(ton/y) ammonia: ', 0, 1000, 350,50)
+Ammonia_specific_invest = Ammonia_specific_invest_tony*8.76 #in euros per kg/h
 Ammonia_OPEX_percentage = st.sidebar.slider('O&M yearly in % CAPEX: ', 0, 20, 2,1)
     
 new_title5 = '<p style="font-size:20px;font-weight:600;color:#f0f2f6">Financial</p>'
@@ -109,6 +74,36 @@ lifetime = st.sidebar.slider('Project lifetime in years:', 0, 30,25,1)
 discountRate_100 = st.sidebar.slider('Desired discount rate in %:', 0, 50, 5,1)
 discountRate = discountRate_100/100
 
+new_title4 = '<p style="font-size:20px;font-weight:600;color:#f0f2f6">Electrolyzer</p>'
+st.sidebar.markdown(new_title4, unsafe_allow_html=True)
+
+#Decide electrolyzer technology
+elec_technology = st.sidebar.selectbox(
+    'Select electrolyzer technology, custom your own or go for a PPA:',
+    ('AEC','SOEC'))  #'Get green H\u2082 through PPA'
+
+
+if elec_technology == 'SOEC':
+    full_load_hours= st.sidebar.slider('Electrolyzer full-load hours of operation in a year: ', 0, 8760, 7500,100)
+    H2_electrolyser_input_1000 = st.sidebar.slider('Power-to-Hydrogen production ratio in kg/MWh: ', 10, 30, 23.3,1)
+    electrolyser_specific_invest= st.sidebar.slider('Electrolyzer capital investment in €/kW: ', 0, 5000, 3000,250)
+    technical_lifetime_stacks= st.sidebar.slider('Stacks lifetime in full-load hours of operation: ', 0, 100000,20000 ,5000)
+    electrolyser_OPEX_percentage2= st.sidebar.slider('O&M yearly in % CAPEX (excluding Stack replacement cost): ', 0, 20, 5,1)
+    electrolyser_STACK_replacement_100 = st.sidebar.slider('Stack replacement cost as % of CAPEX: ', 0, 50,20,1)
+elif elec_technology == 'AEC':
+    full_load_hours= st.sidebar.slider('Electrolyzer full-load hours of operation in a year: ', 0, 8760, 7500,100)
+    H2_electrolyser_input_1000 = st.sidebar.slider('Power-to-Hydrogen production ratio in kg/MWh: ', 10, 30, 20,1)
+    electrolyser_specific_invest= st.sidebar.slider('Electrolyzer capital investment in €/kW: ', 0, 5000, 750,250)
+    technical_lifetime_stacks= st.sidebar.slider('Stacks lifetime in full-load hours of operation: ', 0, 100000,100000 ,5000)
+    electrolyser_OPEX_percentage2= st.sidebar.slider('O&M yearly in % CAPEX (excluding Stack replacement cost): ', 0, 20, 5,1)
+    electrolyser_STACK_replacement_100 = st.sidebar.slider('Stack replacement cost as % of CAPEX: ', 0, 50,30,1)
+elif elec_technology == 'Get green H\u2082 through PPA':
+    Hydrogen_cost = st.sidebar.slider('H\u2082 cost in €/kg: ',0, 15,3,1)  
+    Hydrogen_amount_purchased = st.sidebar.slider('H\u2082 purchased in ton/year: ',0, 85,10,1)
+if elec_technology !='Get green H\u2082 through PPA':
+    H2_electrolyser_input = H2_electrolyser_input_1000/1000
+    electrolyser_OPEX_percentage = electrolyser_OPEX_percentage2/100
+    electrolyser_STACK_replacement = electrolyser_STACK_replacement_100/100
 
 #------------------------------------Income-----------------------------------------------------------------------------------------
 Hydrogen_input_yearly = np.zeros(lifetime +1)   #in kg
@@ -125,9 +120,9 @@ for t in range(1,lifetime+1):
     ammonia_income_yearly[t] = Ammonia_price * ammonia_prod_yearly[t] #€/year
 #Since ammonia synthesis facilities are designed to work with a maximum flow - and the correwsponding capital investment is based on this. Due to the fact that the maximum hydrogen production in one hour is 20kg (for a 1 MW AEC, depends on technology), then the maximum production capacity will be given by:
 if elec_technology=='Get green H\u2082 through PPA':  
-    max_ammonia_prod_flow = Hydrogen_amount_purchased*1000/8760*34/6*Ammonia_H2_conversion/100 #assuming constant h2 input
+    max_ammonia_prod_flow = Hydrogen_amount_purchased*/8760*34/6*Ammonia_H2_conversion/100 #assuming constant h2 input
 else:
-    max_ammonia_prod_flow = H2_electrolyser_input*1000*34/6*Ammonia_H2_conversion/100
+    max_ammonia_prod_flow = H2_electrolyser_input*electrolyser_nom_cap*34/6*Ammonia_H2_conversion/100
 #-----------------------------------OPEX & CAPEX---------------------------------------------------------------------------------------
 
 if elec_technology=='Get green H\u2082 through PPA':    
