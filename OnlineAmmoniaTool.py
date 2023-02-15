@@ -167,7 +167,7 @@ if elec_technology !='Get green H\u2082 through PPA':
 #------------------------------------NPV--------------------------------------------------------------------------------------
 discountRate2 = round(discountRate*100,1)
 npv             = npf.npv(discountRate, cf)
-npv2 = round(npv,0)
+npv2 = int(round(npv,0))
 NPV = np.zeros(len(cf))
 for i in range(0,len(cf)):
     NPV[i] = npf.npv(discountRate, cf[0:(i+1)])
