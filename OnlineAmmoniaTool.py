@@ -304,11 +304,10 @@ else:
     st.altair_chart(rp, use_container_width=True)    
     
 
-a = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec']
-b = [1000,-300,400,-100,100,-700,400,-300,500,-700,100,50]
-waterfall_chart.plot(a, b);
-
-
+    
+    
+    
+    
 brush2 = alt.selection_interval()
 st.write(" # Cash flow plots")
 year=np.linspace(0, lifetime,lifetime+1)
