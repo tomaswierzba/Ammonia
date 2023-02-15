@@ -335,13 +335,13 @@ fig.add_layout_image(
             source="https://images.plot.ly/language-icons/api-home/python-logo.png",
             xref="x",
             yref="y",
-            x=0,
-            y=3,
+            x=3,
+            y=500,
             sizex=2,
-            sizey=2,
+            sizey=200,
             sizing="stretch",
             opacity=0.5,
-            layer="below")
+)
 )
 
 # Set templates
