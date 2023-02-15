@@ -164,7 +164,7 @@ server.enableWebsocketCompression=false
 [theme]
 
 base="light"
-primaryColor=" #ffe300"
+primaryColor="#ffe300"
 backgroundColor="#111E2A"
 textColor="#f0f2f6"
 
