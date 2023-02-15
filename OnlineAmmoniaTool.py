@@ -322,6 +322,8 @@ fig = go.Figure(go.Waterfall(
 fig.update_layout( waterfallgap = 0.2, margin=dict(l=20, r=20, t=20, b=20),font_size=20,autosize=True,hoverlabel_grouptitlefont_size=20,height=600
 )
 
+fig.update_xaxes(label_font=dict(size=20))
+
 fig.show()
 
 st.plotly_chart(fig)# use_container_width=True)
