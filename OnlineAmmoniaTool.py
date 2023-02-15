@@ -19,25 +19,6 @@ from waterfall_ax import WaterfallChart
 import plotly.graph_objects as go
 
 
-fig = go.Figure(go.Waterfall(
-    name = "20", orientation = "v",
-    measure = ["relative", "relative", "total", "relative", "relative", "total"],
-    x = ["Sales", "Consulting", "Net revenue", "Purchases", "Other expenses", "Profit before tax"],
-    textposition = "outside",
-    text = ["","" ,"" , "", "", "Levelised cost of Ammonia"],
-    y = [60, 80, 0, -40, -20, 0],
-    connector = {"line":{"color":"rgb(63, 63, 63)"}},
-))
-
-fig.update_layout(
-        title = "Profit and loss statement 2018",
-        showlegend = False
-)
-
-fig.show()
-
-st.plotly_chart(fig)# use_container_width=True)
-
 
 #from IPython.display import Image
 #import base64, io, IPython
@@ -327,7 +308,24 @@ else:
     st.altair_chart(rp, use_container_width=True)    
     
 
+fig = go.Figure(go.Waterfall(
+    name = "20", orientation = "v",
+    measure = ["relative", "relative", "total", "relative", "relative", "total"],
+    x = ["Sales", "Consulting", "Net revenue", "Purchases", "Other expenses", "Profit before tax"],
+    textposition = "outside",
+    text = ["","" ,"" , "", "", "%s €/ton" % (LCoH2)],
+    y = [60, 80, 0, -40, -20, 0],
+    connector = {"line":{"color":"rgb(63, 63, 63)"}},
+))
 
+fig.update_layout(
+        title = "Profit and loss statement 2018",
+        showlegend = False
+)
+
+fig.show()
+
+st.plotly_chart(fig)# use_container_width=True)
 
  
     
