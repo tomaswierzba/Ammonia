@@ -259,7 +259,7 @@ else:
 #new_title7 = '<p style="font-size:45px;font-weight:700;color:black;text-align:center;">Results</p>'
 #st.write(new_title7, unsafe_allow_html=True)
 st.write(""" # Results """)
-col1, col2 , col3,col4= st.columns([2,2,1,2])
+col1, col2 , col3,col4= st.columns([2,3,1,3])
 col1.metric("Payback time", '%s' % (a101))
 col3.metric("IRR", "%s" % (IRR2))
 col2.metric("NPV", "%s M€/MW"  % (npv2))
