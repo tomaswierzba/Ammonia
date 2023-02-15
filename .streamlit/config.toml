@@ -165,7 +165,7 @@ server.enableWebsocketCompression=false
 
 base="light"
 primaryColor="#ffe300"
-backgroundColor="#111E2A"
+backgroundColor="#430f58" #111E2A"
 textColor="#f0f2f6"
 
 # The preset Streamlit theme that your custom theme inherits from. One of "light" or "dark".
