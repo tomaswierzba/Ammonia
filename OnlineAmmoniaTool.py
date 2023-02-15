@@ -310,8 +310,8 @@ else:
 
 fig = go.Figure(go.Waterfall(
     name = "20", orientation = "v",
-    measure = ["relative", "relative", "total", "relative", "relative", "total"],
-    x = ["Sales", "Consulting", "Net revenue", "Purchases", "Other expenses", "Profit before tax"],
+    measure = ["relative", "relative", "relative", "relative", "relative", "relative", "total"],
+    x = ["Electricity","CAPEX Ammonia Synthesis","CAPEX Electrolyzer", "O&M Ammonia Synthesis", "Stack Replacement","O&M Electrolyzer", "LCoA"],
     textposition = "outside",
     text = ["%s €/ton" % (LCoH_electricity_cost2), "%s €/ton" % (LCoH_capex_am_2),"%s €/ton" % (LCoH_capex_elec_2),"%s €/ton" % (LCoH_opex_ammonia2),"%s €/ton" % (LCoH_stack_rep_cost2),"%s €/ton" % (LCoH_opex_electrolyser2),"%s €/ton" % (LCoH2)],
     y = [LCoH_electricity_cost2,LCoH_capex_am_2,LCoH_capex_elec_2,LCoH_opex_ammonia2,LCoH_stack_rep_cost2, LCoH_opex_electrolyser2,LCoH2 ],
