@@ -1,2 +1,2 @@
 numpy_financial
-plotly.graph_objects
+plotly
