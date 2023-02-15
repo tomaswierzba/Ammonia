@@ -1,2 +1,4 @@
 numpy_financial
-plotly
+matplotlib
+waterfall_chart
+waterfall_ax
