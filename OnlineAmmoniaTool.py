@@ -85,7 +85,7 @@ elec_technology = st.sidebar.selectbox(
 
 if elec_technology == 'SOEC':
     full_load_hours= st.sidebar.slider('Electrolyzer full-load hours of operation in a year: ', 0, 8760, 7500,100)
-    H2_electrolyser_input_1000 = st.sidebar.slider('Power-to-Hydrogen production ratio in kg/MWh: ', 10, 30, 23.3,1)
+    H2_electrolyser_input_1000 = st.sidebar.slider('Power-to-Hydrogen production ratio in kg/MWh: ', 10, 30, 23,1)
     electrolyser_specific_invest= st.sidebar.slider('Electrolyzer capital investment in €/kW: ', 0, 5000, 3000,250)
     technical_lifetime_stacks= st.sidebar.slider('Stacks lifetime in full-load hours of operation: ', 0, 100000,20000 ,5000)
     electrolyser_OPEX_percentage2= st.sidebar.slider('O&M yearly in % CAPEX (excluding Stack replacement cost): ', 0, 20, 5,1)
