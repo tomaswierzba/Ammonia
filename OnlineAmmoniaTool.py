@@ -337,8 +337,7 @@ fig.add_layout_image(
             yref="y",
             x=2,
             y=500,
-            sizex=2,
-            sizey=200,
+
             sizing="stretch",
             opacity=0.5,
 )
