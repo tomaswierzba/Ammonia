@@ -313,8 +313,8 @@ fig = go.Figure(go.Waterfall(
     measure = ["relative", "relative", "total", "relative", "relative", "total"],
     x = ["Sales", "Consulting", "Net revenue", "Purchases", "Other expenses", "Profit before tax"],
     textposition = "outside",
-    text = ["","" ,"" , "", "", "%s €/ton" % (LCoH2)],
-    y = [60, 80, 0, -40, -20, 0],
+    text = ["%s €/ton" % (LCoH_electricity_cost2), "%s €/ton" % (LCoH_capex_am_2),"%s €/ton" % (LCoH_capex_elec_2),"%s €/ton" % (LCoH_opex_ammonia2),"%s €/ton" % (LCoH_stack_rep_cost2),"%s €/ton" % (LCoH_opex_electrolyser2),"%s €/ton" % (LCoH2)],
+    y = [LCoH_electricity_cost2,LCoH_capex_am_2,LCoH_capex_elec_2,LCoH_opex_ammonia2,LCoH_stack_rep_cost2, LCoH_opex_electrolyser2,LCoH2 ],
     connector = {"line":{"color":"rgb(63, 63, 63)"}},
 ))
 
