@@ -319,12 +319,12 @@ fig = go.Figure(go.Waterfall(
      
 ))
 
-fig.update_layout(
+fig.update_layout( waterfallgap = 0.3
 )
 
 fig.show()
 
-st.plotly_chart(fig, theme="streamlit")# use_container_width=True)
+st.plotly_chart(fig)# use_container_width=True)
 
  
     
