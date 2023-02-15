@@ -332,10 +332,10 @@ fig.update_yaxes(tickfont=dict(size=20))
 
 fig.add_layout_image(
         dict(
-            source="https://images.plot.ly/language-icons/api-home/python-logo.png",
+            source="https://raw.githubusercontent.com/tomaswierzba/P2X/main/HG_Yellow_hori.png",
             xref="x",
             yref="y",
-            x=3,
+            x=2,
             y=500,
             sizex=2,
             sizey=200,
