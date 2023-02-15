@@ -319,7 +319,7 @@ fig = go.Figure(go.Waterfall(
     
 ))
 
-fig.update_layout( title = "Waterfall chart",waterfallgap = 0.3, margin=dict(l=20, r=20, t=20, b=20),
+fig.update_layout( waterfallgap = 0.2, margin=dict(l=20, r=20, t=20, b=20),font_size=20
 )
 
 fig.show()
