@@ -335,7 +335,7 @@ fig.add_layout_image(
             source="https://raw.githubusercontent.com/tomaswierzba/P2X/main/HG_Yellow_hori.png",
             xref="x",
             yref="y",
-            x= "O&M Ammonia Synthesis",
+            x= "CAPEX Ammonia Synthesis",
             y=500,
             sizex=3,
             sizey=200,
