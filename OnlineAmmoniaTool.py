@@ -13,7 +13,7 @@ import numpy as np
 import numpy_financial as npf
 import math
 import altair as alt
-pip insatall waterfallcharts
+!pip insatall waterfallcharts
 import waterfall_chart
 import matplotlib.pyplot as plt
 
