@@ -61,7 +61,7 @@ st.sidebar.markdown(new_title4, unsafe_allow_html=True)
 #Decide electrolyzer technology
 elec_technology = st.sidebar.selectbox(
     'Select electrolyzer technology, custom your own or go for a PPA:',
-    ('SOEC', 'AEC', 'Custom', 'Get green H\u2082 through PPA'))
+    ('AEC','SOEC', 'Custom', 'Get green H\u2082 through PPA'))
 
 if elec_technology=='Custom':
     full_load_hours= st.sidebar.slider('Electrolyzer full-load hours of operation in a year: ', 0, 8760, 7500,100)
