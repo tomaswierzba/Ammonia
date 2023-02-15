@@ -96,7 +96,7 @@ new_title4b = '<p style="font-size:20px;font-weight:600;color:#f0f2f6">Ammonia S
 st.sidebar.markdown(new_title4b, unsafe_allow_html=True)
 
 Ammonia_H2_conversion = st.sidebar.slider('Conversion factor as % of H\u2082 converted: ', 50, 100, 90,1)
-Ammonia_specific_invest = st.sidebar.slider('Ammonia capital investment in €/ton ammonia: ', 0, 5000, 1000,250)
+Ammonia_specific_invest = st.sidebar.slider('Ammonia capital investment in €/(kg/h) ammonia: ', 0, 5000, 1000,250)
 Ammonia_OPEX_percentage = st.sidebar.slider('O&M yearly in % CAPEX: ', 0, 20, 5,1)
     
 new_title5 = '<p style="font-size:20px;font-weight:600;color:#f0f2f6">Financial</p>'
@@ -123,6 +123,8 @@ for t in range(1,lifetime+1):
 ammonia_income_yearly = np.zeros(lifetime +1)
 for t in range(1,lifetime+1):
     ammonia_income_yearly[t] = Ammonia_price * ammonia_prod_yearly[t] #€/year
+#Since ammonia synthesis facilities are designed to work with a maximum flow - and the correwsponding capital investment is based on this. Due to the fact that the maximum hydrogen production in one hour is 20kg (for a 1 MW AEC, depends on technology), then the maximum production capacity will be given by:
+max_ammonia_prod_flow = H2_electrolyser_input*1000*34/6*Ammonia_H2_conversion/100
 
 #-----------------------------------OPEX & CAPEX---------------------------------------------------------------------------------------
 
@@ -137,7 +139,7 @@ else:
     
 OPEX_ammonia_synthesis = Ammonia_OPEX_percentage/100*Ammonia_specific_invest*ammonia_prod_yearly[1]
 OPEX_yearly              = OPEX_electrolyser_yearly + Electricity_cost_yearly + OPEX_ammonia_synthesis #€/year this is the yearly OPEX
-CAPEX_ammonia = Ammonia_specific_invest*ammonia_prod_yearly[1]
+CAPEX_ammonia = Ammonia_specific_invest*max_ammonia_prod_flow
 CAPEX                   = CAPEX_electrolyser + CAPEX_ammonia
 #Replacement cost for stacks when technical lifetime is achieved included in cash flow
 
