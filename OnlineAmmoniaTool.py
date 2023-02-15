@@ -96,8 +96,8 @@ new_title4b = '<p style="font-size:20px;font-weight:600;color:#f0f2f6">Ammonia S
 st.sidebar.markdown(new_title4b, unsafe_allow_html=True)
 
 Ammonia_H2_conversion = st.sidebar.slider('Conversion factor as % of H\u2082 converted: ', 50, 100, 90,1)
-Ammonia_specific_invest = st.sidebar.slider('Ammonia capital investment in €/(kg/h) ammonia: ', 0, 5000, 1000,250)
-Ammonia_OPEX_percentage = st.sidebar.slider('O&M yearly in % CAPEX: ', 0, 20, 5,1)
+Ammonia_specific_invest = st.sidebar.slider('Ammonia capital investment in €/(kg/h) ammonia: ', 0, 5000, 3000,250)
+Ammonia_OPEX_percentage = st.sidebar.slider('O&M yearly in % CAPEX: ', 0, 20, 2,1)
     
 new_title5 = '<p style="font-size:20px;font-weight:600;color:#f0f2f6">Financial</p>'
 st.sidebar.markdown(new_title5, unsafe_allow_html=True)
@@ -124,8 +124,10 @@ ammonia_income_yearly = np.zeros(lifetime +1)
 for t in range(1,lifetime+1):
     ammonia_income_yearly[t] = Ammonia_price * ammonia_prod_yearly[t] #€/year
 #Since ammonia synthesis facilities are designed to work with a maximum flow - and the correwsponding capital investment is based on this. Due to the fact that the maximum hydrogen production in one hour is 20kg (for a 1 MW AEC, depends on technology), then the maximum production capacity will be given by:
-max_ammonia_prod_flow = H2_electrolyser_input*1000*34/6*Ammonia_H2_conversion/100
-
+if elec_technology=='Get green H\u2082 through PPA':  
+    max_ammonia_prod_flow = Hydrogen_amount_purchased*1000/8760*34/6*Ammonia_H2_conversion/100 #assuming constant h2 input
+else:
+    max_ammonia_prod_flow = H2_electrolyser_input*1000*34/6*Ammonia_H2_conversion/100
 #-----------------------------------OPEX & CAPEX---------------------------------------------------------------------------------------
 
 if elec_technology=='Get green H\u2082 through PPA':    
@@ -261,23 +263,41 @@ st.metric("Cost-driver","%s (%s %% of cost)" % (a20, per_main_costdriver))
 #st.write("The main cost-driver for the Levelized Cost of Hydrogen is found to be %s, accounting for %s %% of the cost." % (a20, per_main_costdriver))
 
 st.write(" # Levelised cost contributions for Ammonia")
-source = pd.DataFrame({"Values": [LCoH_electricity_cost2,LCoH_capex_am_2,LCoH_capex_elec_2,LCoH_opex_ammonia2,LCoH_stack_rep_cost2, LCoH_opex_electrolyser2],"Cost contribution": ['Electricity: %s €/ton' % (LCoH_electricity_cost2),'CAPEX Ammonia Synthesis: %s €/ton' % (LCoH_capex_am_2),'CAPEX Electrolyzer: %s €/ton' % (LCoH_capex_elec_2),'O&M Ammonia Synthesis: %s €/ton' % (LCoH_opex_ammonia2),'Stack Replacement: %s €/ton' % (LCoH_stack_rep_cost2),'O&M Electrolyzer: %s €/ton' % (LCoH_opex_electrolyser2)],"labels":["%s €/ton" % (LCoH_electricity_cost2),"%s €/ton" % (LCoH_capex_am_2),"%s €/ton" % (LCoH_capex_elec_2),"%s €/ton" % (LCoH_stack_rep_cost2),"%s €/ton" % (LCoH_opex_electrolyser2),"%s €/ton" % (LCoH_opex_ammonia2)]})
-domain = ['Electricity: %s €/ton' % (LCoH_electricity_cost2),'CAPEX Ammonia Synthesis: %s €/ton' % (LCoH_capex_am_2),'CAPEX Electrolyzer: %s €/ton' % (LCoH_capex_elec_2),'O&M Ammonia Synthesis: %s €/ton' % (LCoH_opex_ammonia2),'Stack Replacement: %s €/ton' % (LCoH_stack_rep_cost2),'O&M Electrolyzer: %s €/ton' % (LCoH_opex_electrolyser2)]
-range_ = ['#088da5', 'grey', '#f0f2f6', '#ffe300','blue','red']
-base = alt.Chart(source).encode(
-    theta=alt.Theta("Values:Q", stack=True), color=alt.Color('Cost contribution:N', scale=alt.Scale(domain=domain, range=range_),legend=alt.Legend(clipHeight=50)),
-    radius=alt.Radius("Values:Q", scale=alt.Scale(type="sqrt", zero=True, rangeMin=20)),
-)
 
-c1 = base.mark_arc(innerRadius=20)
+if elec_technology !='Get green H\u2082 through PPA': 
+    source = pd.DataFrame({"Values": [LCoH_electricity_cost2,LCoH_capex_am_2,LCoH_capex_elec_2,LCoH_opex_ammonia2,LCoH_stack_rep_cost2, LCoH_opex_electrolyser2],"Cost contribution": ['Electricity: %s €/ton' % (LCoH_electricity_cost2),'CAPEX Ammonia Synthesis: %s €/ton' % (LCoH_capex_am_2),'CAPEX Electrolyzer: %s €/ton' % (LCoH_capex_elec_2),'O&M Ammonia Synthesis: %s €/ton' % (LCoH_opex_ammonia2),'Stack Replacement: %s €/ton' % (LCoH_stack_rep_cost2),'O&M Electrolyzer: %s €/ton' % (LCoH_opex_electrolyser2)],"labels":["%s €/ton" % (LCoH_electricity_cost2),"%s €/ton" % (LCoH_capex_am_2),"%s €/ton" % (LCoH_capex_elec_2),"%s €/ton" % (LCoH_stack_rep_cost2),"%s €/ton" % (LCoH_opex_electrolyser2),"%s €/ton" % (LCoH_opex_ammonia2)]})
+    domain = ['Electricity: %s €/ton' % (LCoH_electricity_cost2),'CAPEX Ammonia Synthesis: %s €/ton' % (LCoH_capex_am_2),'CAPEX Electrolyzer: %s €/ton' % (LCoH_capex_elec_2),'O&M Ammonia Synthesis: %s €/ton' % (LCoH_opex_ammonia2),'Stack Replacement: %s €/ton' % (LCoH_stack_rep_cost2),'O&M Electrolyzer: %s €/ton' % (LCoH_opex_electrolyser2)]
+    range_ = ['#088da5', 'grey', '#f0f2f6', '#ffe300','blue','red']
+    base = alt.Chart(source).encode(
+        theta=alt.Theta("Values:Q", stack=True), color=alt.Color('Cost contribution:N', scale=alt.Scale(domain=domain, range=range_),legend=alt.Legend(clipHeight=50)),
+        radius=alt.Radius("Values:Q", scale=alt.Scale(type="sqrt", zero=True, rangeMin=20)),
+    )
 
-#c2 = base.mark_text(radiusOffset=45).encode(text="labels:N")
+    c1 = base.mark_arc(innerRadius=20)
+
+    #c2 = base.mark_text(radiusOffset=45).encode(text="labels:N")
 
 
-rp=(c1).configure_text(fontSize=25,fontWeight=600).configure_legend(titleFontSize=22, titleFontWeight=600,labelFontSize= 20,labelFontWeight=600,labelLimit= 0)#.configure(autosize="fit")
+    rp=(c1).configure_text(fontSize=25,fontWeight=600).configure_legend(titleFontSize=22, titleFontWeight=600,labelFontSize= 20,labelFontWeight=600,labelLimit= 0)#.configure(autosize="fit")
 
-st.altair_chart(rp, use_container_width=True)
+    st.altair_chart(rp, use_container_width=True)
+else: 
+    source = pd.DataFrame({"Values": [LCoH_capex_am_2,LCoH_opex_ammonia2, LCoH_opex_electrolyser2],"Cost contribution": ['CAPEX Ammonia Synthesis: %s €/ton' % (LCoH_capex_am_2),'O&M Ammonia Synthesis: %s €/ton' % (LCoH_opex_ammonia2),'Green Hydrogen cost PPA: %s €/ton' % (LCoH_opex_electrolyser2)],"labels":["%s €/ton" % (LCoH_capex_am_2),"%s €/ton" % (LCoH_opex_electrolyser2),"%s €/ton" % (LCoH_opex_ammonia2)]})
+    domain = ['CAPEX Ammonia Synthesis: %s €/ton' % (LCoH_capex_am_2),'O&M Ammonia Synthesis: %s €/ton' % (LCoH_opex_ammonia2),'Green Hydrogen cost PPA: %s €/ton' % (LCoH_opex_electrolyser2)]
+    range_ = ['#088da5', 'grey', '#f0f2f6']
+    base = alt.Chart(source).encode(
+        theta=alt.Theta("Values:Q", stack=True), color=alt.Color('Cost contribution:N', scale=alt.Scale(domain=domain, range=range_),legend=alt.Legend(clipHeight=50)),
+        radius=alt.Radius("Values:Q", scale=alt.Scale(type="sqrt", zero=True, rangeMin=20)),
+    )
 
+    c1 = base.mark_arc(innerRadius=20)
+
+    #c2 = base.mark_text(radiusOffset=45).encode(text="labels:N")
+
+
+    rp=(c1).configure_text(fontSize=25,fontWeight=600).configure_legend(titleFontSize=22, titleFontWeight=600,labelFontSize= 20,labelFontWeight=600,labelLimit= 0)#.configure(autosize="fit")
+
+    st.altair_chart(rp, use_container_width=True)    
 brush2 = alt.selection_interval()
 st.write(" # Cash flow plots")
 year=np.linspace(0, lifetime,lifetime+1)
