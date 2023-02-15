@@ -13,7 +13,9 @@ import numpy as np
 import numpy_financial as npf
 import math
 import altair as alt
-
+import matplotlib.pyplot as plt
+import waterfall_chart
+from waterfall_ax import WaterfallChart
 
 
 #from IPython.display import Image
