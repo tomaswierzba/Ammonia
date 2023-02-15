@@ -16,19 +16,9 @@ import altair as alt
 import matplotlib.pyplot as plt
 import waterfall_chart
 from waterfall_ax import WaterfallChart
+import plotly.graph_objects as go
 
-plt.rcParams["figure.figsize"] = (16, 8)
 
-df = pd.DataFrame(
-    data={
-        "time": ["2021 end", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        "users": [100, 120, 110, 150, 160, 190, 240, 200, 230, 240, 250, 280, 300]
-    }
-)
-
-fig, ax = plt.subplots(1, 1, figsize=(16, 8))
-waterfall = WaterfallChart(df["users"].to_list())
-wf_ax = waterfall.plot_waterfall(ax=ax, title="# of users in 2022")
 
 
 
