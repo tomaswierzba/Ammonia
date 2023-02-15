@@ -272,40 +272,40 @@ st.metric("Cost-driver","%s (%s %% of cost)" % (a20, per_main_costdriver))
 
 st.write(" # Levelised cost contributions for Ammonia")
 
-if elec_technology !='Get green H\u2082 through PPA': 
-    source = pd.DataFrame({"Values": [LCoH_electricity_cost2,LCoH_capex_am_2,LCoH_capex_elec_2,LCoH_opex_ammonia2,LCoH_stack_rep_cost2, LCoH_opex_electrolyser2],"Cost contribution": ['Electricity: %s €/ton' % (LCoH_electricity_cost2),'CAPEX Ammonia Synthesis: %s €/ton' % (LCoH_capex_am_2),'CAPEX Electrolyzer: %s €/ton' % (LCoH_capex_elec_2),'O&M Ammonia Synthesis: %s €/ton' % (LCoH_opex_ammonia2),'Stack Replacement: %s €/ton' % (LCoH_stack_rep_cost2),'O&M Electrolyzer: %s €/ton' % (LCoH_opex_electrolyser2)],"labels":["%s €/ton" % (LCoH_electricity_cost2),"%s €/ton" % (LCoH_capex_am_2),"%s €/ton" % (LCoH_capex_elec_2),"%s €/ton" % (LCoH_stack_rep_cost2),"%s €/ton" % (LCoH_opex_electrolyser2),"%s €/ton" % (LCoH_opex_ammonia2)]})
-    domain = ['Electricity: %s €/ton' % (LCoH_electricity_cost2),'CAPEX Ammonia Synthesis: %s €/ton' % (LCoH_capex_am_2),'CAPEX Electrolyzer: %s €/ton' % (LCoH_capex_elec_2),'O&M Ammonia Synthesis: %s €/ton' % (LCoH_opex_ammonia2),'Stack Replacement: %s €/ton' % (LCoH_stack_rep_cost2),'O&M Electrolyzer: %s €/ton' % (LCoH_opex_electrolyser2)]
-    range_ = ['#088da5', 'grey', '#f0f2f6', '#ffe300','blue','red']
-    base = alt.Chart(source).encode(
-        theta=alt.Theta("Values:Q", stack=True), color=alt.Color('Cost contribution:N', scale=alt.Scale(domain=domain, range=range_),legend=alt.Legend(clipHeight=50)),
-        radius=alt.Radius("Values:Q", scale=alt.Scale(type="sqrt", zero=True, rangeMin=20)),
-    )
+# if elec_technology !='Get green H\u2082 through PPA': 
+#     source = pd.DataFrame({"Values": [LCoH_electricity_cost2,LCoH_capex_am_2,LCoH_capex_elec_2,LCoH_opex_ammonia2,LCoH_stack_rep_cost2, LCoH_opex_electrolyser2],"Cost contribution": ['Electricity: %s €/ton' % (LCoH_electricity_cost2),'CAPEX Ammonia Synthesis: %s €/ton' % (LCoH_capex_am_2),'CAPEX Electrolyzer: %s €/ton' % (LCoH_capex_elec_2),'O&M Ammonia Synthesis: %s €/ton' % (LCoH_opex_ammonia2),'Stack Replacement: %s €/ton' % (LCoH_stack_rep_cost2),'O&M Electrolyzer: %s €/ton' % (LCoH_opex_electrolyser2)],"labels":["%s €/ton" % (LCoH_electricity_cost2),"%s €/ton" % (LCoH_capex_am_2),"%s €/ton" % (LCoH_capex_elec_2),"%s €/ton" % (LCoH_stack_rep_cost2),"%s €/ton" % (LCoH_opex_electrolyser2),"%s €/ton" % (LCoH_opex_ammonia2)]})
+#     domain = ['Electricity: %s €/ton' % (LCoH_electricity_cost2),'CAPEX Ammonia Synthesis: %s €/ton' % (LCoH_capex_am_2),'CAPEX Electrolyzer: %s €/ton' % (LCoH_capex_elec_2),'O&M Ammonia Synthesis: %s €/ton' % (LCoH_opex_ammonia2),'Stack Replacement: %s €/ton' % (LCoH_stack_rep_cost2),'O&M Electrolyzer: %s €/ton' % (LCoH_opex_electrolyser2)]
+#     range_ = ['#088da5', 'grey', '#f0f2f6', '#ffe300','blue','red']
+#     base = alt.Chart(source).encode(
+#         theta=alt.Theta("Values:Q", stack=True), color=alt.Color('Cost contribution:N', scale=alt.Scale(domain=domain, range=range_),legend=alt.Legend(clipHeight=50)),
+#         radius=alt.Radius("Values:Q", scale=alt.Scale(type="sqrt", zero=True, rangeMin=20)),
+#     )
 
-    c1 = base.mark_arc(innerRadius=20)
+#     c1 = base.mark_arc(innerRadius=20)
 
-    #c2 = base.mark_text(radiusOffset=45).encode(text="labels:N")
-
-
-    rp=(c1).configure_text(fontSize=25,fontWeight=600).configure_legend(titleFontSize=22, titleFontWeight=600,labelFontSize= 20,labelFontWeight=600,labelLimit= 0)#.configure(autosize="fit")
-
-    st.altair_chart(rp, use_container_width=True)
-else: 
-    source = pd.DataFrame({"Values": [LCoH_capex_am_2,LCoH_opex_ammonia2, LCoH_opex_electrolyser2],"Cost contribution": ['CAPEX Ammonia Synthesis: %s €/ton' % (LCoH_capex_am_2),'O&M Ammonia Synthesis: %s €/ton' % (LCoH_opex_ammonia2),'Green Hydrogen cost PPA: %s €/ton' % (LCoH_opex_electrolyser2)],"labels":["%s €/ton" % (LCoH_capex_am_2),"%s €/ton" % (LCoH_opex_electrolyser2),"%s €/ton" % (LCoH_opex_ammonia2)]})
-    domain = ['CAPEX Ammonia Synthesis: %s €/ton' % (LCoH_capex_am_2),'O&M Ammonia Synthesis: %s €/ton' % (LCoH_opex_ammonia2),'Green Hydrogen cost PPA: %s €/ton' % (LCoH_opex_electrolyser2)]
-    range_ = [ 'grey','#ffe300','#a2c11c']
-    base = alt.Chart(source).encode(
-        theta=alt.Theta("Values:Q", stack=True), color=alt.Color('Cost contribution:N', scale=alt.Scale(domain=domain, range=range_),legend=alt.Legend(clipHeight=50)),
-        radius=alt.Radius("Values:Q", scale=alt.Scale(type="sqrt", zero=True, rangeMin=20)),
-    )
-
-    c1 = base.mark_arc(innerRadius=20)
-
-    #c2 = base.mark_text(radiusOffset=45).encode(text="labels:N")
+#     #c2 = base.mark_text(radiusOffset=45).encode(text="labels:N")
 
 
-    rp=(c1).configure_text(fontSize=25,fontWeight=600).configure_legend(titleFontSize=22, titleFontWeight=600,labelFontSize= 20,labelFontWeight=600,labelLimit= 0)#.configure(autosize="fit")
+#     rp=(c1).configure_text(fontSize=25,fontWeight=600).configure_legend(titleFontSize=22, titleFontWeight=600,labelFontSize= 20,labelFontWeight=600,labelLimit= 0)#.configure(autosize="fit")
 
-    st.altair_chart(rp, use_container_width=True)    
+#     st.altair_chart(rp, use_container_width=True)
+# else: 
+#     source = pd.DataFrame({"Values": [LCoH_capex_am_2,LCoH_opex_ammonia2, LCoH_opex_electrolyser2],"Cost contribution": ['CAPEX Ammonia Synthesis: %s €/ton' % (LCoH_capex_am_2),'O&M Ammonia Synthesis: %s €/ton' % (LCoH_opex_ammonia2),'Green Hydrogen cost PPA: %s €/ton' % (LCoH_opex_electrolyser2)],"labels":["%s €/ton" % (LCoH_capex_am_2),"%s €/ton" % (LCoH_opex_electrolyser2),"%s €/ton" % (LCoH_opex_ammonia2)]})
+#     domain = ['CAPEX Ammonia Synthesis: %s €/ton' % (LCoH_capex_am_2),'O&M Ammonia Synthesis: %s €/ton' % (LCoH_opex_ammonia2),'Green Hydrogen cost PPA: %s €/ton' % (LCoH_opex_electrolyser2)]
+#     range_ = [ 'grey','#ffe300','#a2c11c']
+#     base = alt.Chart(source).encode(
+#         theta=alt.Theta("Values:Q", stack=True), color=alt.Color('Cost contribution:N', scale=alt.Scale(domain=domain, range=range_),legend=alt.Legend(clipHeight=50)),
+#         radius=alt.Radius("Values:Q", scale=alt.Scale(type="sqrt", zero=True, rangeMin=20)),
+#     )
+
+#     c1 = base.mark_arc(innerRadius=20)
+
+#     #c2 = base.mark_text(radiusOffset=45).encode(text="labels:N")
+
+
+#     rp=(c1).configure_text(fontSize=25,fontWeight=600).configure_legend(titleFontSize=22, titleFontWeight=600,labelFontSize= 20,labelFontWeight=600,labelLimit= 0)#.configure(autosize="fit")
+
+#     st.altair_chart(rp, use_container_width=True) 
     
 
 fig = go.Figure(go.Waterfall(
@@ -319,7 +319,7 @@ fig = go.Figure(go.Waterfall(
 ))
 
 fig.update_layout(
-        title = "Profit and loss statement 2018",
+        title = "",
         showlegend = False
 )
 
