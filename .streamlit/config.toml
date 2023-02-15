@@ -164,7 +164,7 @@ server.enableWebsocketCompression=false
 [theme]
 
 base="light"
-primaryColor="#a2c11c"
+primaryColor=" #ffe300"
 backgroundColor="#111E2A"
 textColor="#f0f2f6"
 
@@ -178,7 +178,7 @@ textColor="#f0f2f6"
 # backgroundColor =
 
 # Background color used for the sidebar and most interactive widgets.
-secondaryBackgroundColor ="#194366"
+secondaryBackgroundColor ="#a2c11c" #194366"
 
 # Color used for almost all text.
 # textColor =
