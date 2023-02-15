@@ -24,7 +24,7 @@ fig = go.Figure(go.Waterfall(
     measure = ["relative", "relative", "total", "relative", "relative", "total"],
     x = ["Sales", "Consulting", "Net revenue", "Purchases", "Other expenses", "Profit before tax"],
     textposition = "outside",
-    text = [, , , , , "Levelised cost of Ammonia"],
+    text = ["","" ,"" , "", "", "Levelised cost of Ammonia"],
     y = [60, 80, 0, -40, -20, 0],
     connector = {"line":{"color":"rgb(63, 63, 63)"}},
 ))
