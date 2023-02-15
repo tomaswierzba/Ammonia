@@ -42,7 +42,7 @@ st.sidebar.image(image2)
 
 new_title1 = '<p style="font-size:25px;font-weight:600;color:#f0f2f6">Key variables</p>'
 st.sidebar.write(new_title1, unsafe_allow_html=True)
-new_title3 = '<p style="font-size:15px;font-weight:500;color:#f0f2f6">This tool assumes a 1 MW electrolyzer. Main variables for this business case-study can be changed in the left pane and their initial values repesent SOEC technology.</p>'
+new_title3 = '<p style="font-size:15px;font-weight:500;color:#f0f2f6">This tool assumes a 1 MW electrolyzer. Main variables for this business case-study can be changed in the left pane and their initial values repesent AEC technology.</p>'
 st.sidebar.write(new_title3, unsafe_allow_html=True)
 
 new_title2 = '<p style="font-size:20px;font-weight:600;color:#f0f2f6">Market prices</p>'
@@ -52,7 +52,7 @@ Ammonia_price = st.sidebar.slider('Average Ammonia sales price in €/ton:',0, 2
 
 
 #Decide average electricity spot price
-Electricity_spot_MWh = st.sidebar.slider('Average electricity spot price in €/MWh: ', 0, 200, 60,10)
+Electricity_spot_MWh = st.sidebar.slider('Average electricity spot price in €/MWh: ', 0, 200, 50,10)
 Electricity_spot = Electricity_spot_MWh/1000
 
 new_title4 = '<p style="font-size:20px;font-weight:600;color:#f0f2f6">Electrolyzer</p>'
@@ -259,12 +259,13 @@ else:
 #new_title7 = '<p style="font-size:45px;font-weight:700;color:black;text-align:center;">Results</p>'
 #st.write(new_title7, unsafe_allow_html=True)
 st.write(""" # Results """)
-col1, col2 , col3, col4= st.columns(4)
+col1, col2 , col3= st.columns(3)
 col1.metric("Payback time", '%s' % (a101))
 col3.metric("IRR", "%s" % (IRR2))
-col4.metric("LCoH", "%s €/ton" % (LCoH2))
 col2.metric("NPV", "%s M€/MW"  % (npv2))
-st.metric("Cost-driver","%s (%s %% of cost)" % (a20, per_main_costdriver))
+col5, col6= st.columns(2)
+col5.metric("LCoH", "%s €/ton" % (LCoH2))
+col6.metric("Cost-driver","%s (%s %% of cost)" % (a20, per_main_costdriver))
 #st.write("The main cost-driver for the Levelized Cost of Hydrogen is found to be %s, accounting for %s %% of the cost." % (a20, per_main_costdriver))
 
 st.write(" # Levelised cost contributions for Ammonia")
