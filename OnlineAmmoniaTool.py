@@ -13,7 +13,7 @@ import numpy as np
 import numpy_financial as npf
 import math
 import altair as alt
-
+import plotly.graph_objects as go
 
 
 #from IPython.display import Image
@@ -302,6 +302,25 @@ else:
     rp=(c1).configure_text(fontSize=25,fontWeight=600).configure_legend(titleFontSize=22, titleFontWeight=600,labelFontSize= 20,labelFontWeight=600,labelLimit= 0)#.configure(autosize="fit")
 
     st.altair_chart(rp, use_container_width=True)    
+    
+
+
+fig = go.Figure(go.Waterfall(
+    name = "20", orientation = "v",
+    measure = ["relative", "relative", "total", "relative", "relative", "total"],
+    x = ["Sales", "Consulting", "Net revenue", "Purchases", "Other expenses", "Profit before tax"],
+    textposition = "outside",
+    text = ["+60", "+80", "", "-40", "-20", "Total"],
+    y = [60, 80, 0, -40, -20, 0],
+    connector = {"line":{"color":"rgb(63, 63, 63)"}},
+))
+
+fig.update_layout(
+        title = "Profit and loss statement 2018",
+        showlegend = True
+)
+
+fig.show()
 brush2 = alt.selection_interval()
 st.write(" # Cash flow plots")
 year=np.linspace(0, lifetime,lifetime+1)
